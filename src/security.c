@@ -299,7 +299,7 @@ static int print_seclevel_handler(struct nl_msg *msg, void *arg)
 	if (tb[NL802154_ATTR_SEC_LEVEL]) {
 		struct nlattr *tb_seclevel[NL802154_SECLEVEL_ATTR_MAX + 1];
 		static struct nla_policy seclevel_policy[NL802154_SECLEVEL_ATTR_MAX + 1] = {
-			[NL802154_SECLEVEL_ATTR_LEVELS] = { .type = NLA_U32 },
+			[NL802154_SECLEVEL_ATTR_LEVELS] = { .type = NLA_U8 },
 			[NL802154_SECLEVEL_ATTR_FRAME] = { .type = NLA_U32 },
 			[NL802154_SECLEVEL_ATTR_CMD_FRAME] = { .type = NLA_U32 },
 			[NL802154_SECLEVEL_ATTR_DEV_OVERRIDE] = { .type = NLA_U8 },
@@ -400,7 +400,7 @@ static int handle_seclevel_add(struct nl802154_state *state, struct nl_cb *cb,
 	if (!seclevel_msg)
 		return -ENOMEM;
 
-	NLA_PUT_U32(seclevel_msg, NL802154_SECLEVEL_ATTR_LEVELS, levels);
+	NLA_PUT_U8(seclevel_msg, NL802154_SECLEVEL_ATTR_LEVELS, levels);
 	NLA_PUT_U32(seclevel_msg, NL802154_SECLEVEL_ATTR_FRAME, frame);
 	if (frame == NL802154_FRAME_CMD)
 		NLA_PUT_U32(seclevel_msg, NL802154_SECLEVEL_ATTR_CMD_FRAME, cmd_id);
